@@ -76,7 +76,7 @@ def ask_pdf(pdf_path: str | Path, instructions: str, schema: Type[T] | None = No
 
     - Without `schema`: returns plain text.
     - With a Pydantic `schema`: returns a filled-in instance of it (structured output),
-      which is the easiest way to get a script / storyboard / post you can loop over.
+      which is the easiest way to get a script / storyboard / poster you can loop over.
     """
     messages = [{
         "role": "user",

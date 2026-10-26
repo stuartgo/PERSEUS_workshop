@@ -1,11 +1,11 @@
 # 📄➡️🎬 Paper Remix
 
-**A hands-on workshop: take a research paper (PDF) and turn it into something people actually want to consume — a post, a podcast, a video, or anything else you can dream up — using the OpenAI API.**
+**A hands-on workshop: take a research paper (PDF) and turn it into something people actually want to consume — a poster, a podcast, a video, or anything else you can dream up — using the OpenAI API.**
 
 You get an API key, three working examples and a tiny helper library. The rest is up to your creativity.
 
 ```
-papers/attention.pdf ──► python examples/paper_to_post.py     ──► 📝 blog post + cover image
+papers/attention.pdf ──► python examples/paper_to_poster.py   ──► 🖼️ poster
                      ──► python examples/paper_to_podcast.py  ──► 🎙️ two-host podcast episode
                      ──► python examples/paper_to_video.py    ──► 🎬 narrated explainer video
 ```
@@ -55,13 +55,13 @@ cp .env.example .env
 **3. Drop a paper into `papers/` and run an example**
 
 ```bash
-python examples/paper_to_post.py papers/my-paper.pdf
+python examples/paper_to_poster.py papers/my-paper.pdf
 ```
 
-Results land in `output/<paper-name>/<post|podcast|video>/`.
+Results land in `output/<paper-name>/<poster|podcast|video>/`.
 
-> ⏱️ Speed guide: post ≈ 30–60 s · podcast ≈ 1–2 min · video (`--mode slides`) ≈ 2 min · video with Sora ≈ 5–10 min.
-> Start with the post, then the podcast, then the video.
+> ⏱️ Speed guide: poster ≈ 1–2 min · podcast ≈ 1–2 min · video (`--mode slides`) ≈ 2 min · video with Sora ≈ 5–10 min.
+> Start with the poster, then the podcast, then the video.
 
 ---
 
@@ -71,7 +71,7 @@ Every example follows the same three-step recipe:
 
 ```mermaid
 flowchart LR
-    A[📄 PDF] -->|Responses API<br/>+ structured output| B[🧩 Structured plan<br/>post / script / storyboard]
+    A[📄 PDF] -->|Responses API<br/>+ structured output| B[🧩 Structured plan<br/>poster / script / storyboard]
     B -->|Images API| C[🖼️ images]
     B -->|Text-to-speech| D[🔊 voices]
     B -->|Videos API · Sora| E[🎞️ clips]
@@ -88,7 +88,7 @@ All OpenAI calls live in **[`paperkit.py`](paperkit.py)** (~150 lines). Read it 
 paper-remix/
 ├── paperkit.py               # shared building blocks (read me first!)
 ├── examples/
-│   ├── paper_to_post.py      # Example 1: post + cover image
+│   ├── paper_to_poster.py    # Example 1: poster
 │   ├── paper_to_podcast.py   # Example 2: two-host podcast
 │   ├── paper_to_video.py     # Example 3: narrated video (Sora or slides)
 │   └── starter.py            # template for your own idea (a comic strip)
@@ -102,19 +102,30 @@ paper-remix/
 
 ## The three examples
 
-### 1. 📝 Paper → Post — `examples/paper_to_post.py`
+### 1. 🖼️ Paper → Poster — `examples/paper_to_poster.py`
 
-Writes a social-media or blog post about the paper and generates a cover illustration.
+Distils the paper into poster content (title, tagline, one big result, three short blocks, a credit line and a visual metaphor) and turns it into a portrait poster.
 
 ```bash
-python examples/paper_to_post.py papers/my-paper.pdf
-python examples/paper_to_post.py papers/my-paper.pdf --format "LinkedIn post" --audience "hospital managers"
-python examples/paper_to_post.py papers/my-paper.pdf --format "Twitter/X thread" --tone "playful" --no-image
+python examples/paper_to_poster.py papers/my-paper.pdf
+python examples/paper_to_poster.py papers/my-paper.pdf --style "1970s sci-fi movie poster"
+python examples/paper_to_poster.py papers/my-paper.pdf --style "vintage travel poster" --quality low   # cheap draft
+python examples/paper_to_poster.py papers/my-paper.pdf --mode layout --style "clean Swiss design"
 ```
 
-**Output:** `post.md`, `post.html` (open in a browser — nice for showing on a projector), `cover.png`
+| Option | Meaning |
+|---|---|
+| `--mode image` (default) | The image model draws the **whole poster, text included**. Most striking; keep text short, as small text can occasionally come out misspelled. |
+| `--mode layout` | The image model draws only the illustration; the text is laid out in `poster.html` with exact typography. Open it in a browser → *Print → Save as PDF* for an A3 print. |
+| `--style "..."` | Any poster style: movie poster, propaganda poster, Bauhaus, conference poster, concert flyer… |
+| `--audience "..."` | Who it's for (default: curious non-experts walking past) |
+| `--quality low\|medium\|high` | Image quality (default `high`); use `low` while iterating |
 
-**APIs used:** Responses API (PDF in → `Post` schema out) · Images API (`gpt-image-2`)
+**Output:** `poster.png` (image mode) or `poster.html` + `illustration.png` (layout mode), plus `poster.json` (the content) and `image_prompt.txt` (the exact prompt sent, great for tweaking by hand).
+
+**APIs used:** Responses API (PDF in → `Poster` schema out) · Images API (`gpt-image-2`, 1024×1536 portrait)
+
+**Hack it:** a poster series (one per section of the paper), a "wanted" poster for the paper's main bug, a movie poster with the authors' methods as the cast.
 
 ### 2. 🎙️ Paper → Podcast — `examples/paper_to_podcast.py`
 
@@ -240,7 +251,7 @@ Pick an idea (or invent one), copy `examples/starter.py`, and build it. Then dem
 - Translate the podcast into another language with `--language`
 - Make the hosts disagree — one believes the paper, one doesn't
 - Use the paper's own figures: ask the model to describe Figure 2, then reimagine it as an illustration
-- Feed the *post* into the video script — chain your remixes
+- Use the *poster* as the first frame of the video — chain your remixes
 - Two papers at once: "this paper vs. that paper" showdown
 
 **Judging criteria (suggestion):** 🎯 faithful to the paper · 😂 fun · 💡 would make someone read the original · 🛠️ technical creativity
@@ -267,7 +278,7 @@ Pick an idea (or invent one), copy `examples/starter.py`, and build it. Then dem
 | Time | What |
 |---|---|
 | 0:00 | Intro: the recipe (read → restructure → render), tour of `paperkit.py` |
-| 0:20 | Everyone runs `paper_to_post.py` (setup check) |
+| 0:20 | Everyone runs `paper_to_poster.py --quality low` (setup check) |
 | 0:35 | Live demo of the podcast and video examples |
 | 0:50 | Form teams, pick an idea, build |
 | 2:20 | Demos (3 min per team) + vote |
