@@ -104,26 +104,27 @@ paper-remix/
 
 ### 1. 🖼️ Paper → Poster — `examples/paper_to_poster.py`
 
-Distils the paper into poster content (title, tagline, one big result, three short blocks, a credit line and a visual metaphor) and turns it into a portrait poster.
+Distils the paper into a **scientific conference poster**: title, authors and affiliations, a take-home message, Introduction / Objectives / Methods / Results / Conclusions / References as bullet points, 1–3 headline numbers, and a schematic overview figure with caption.
 
 ```bash
 python examples/paper_to_poster.py papers/my-paper.pdf
-python examples/paper_to_poster.py papers/my-paper.pdf --style "1970s sci-fi movie poster"
-python examples/paper_to_poster.py papers/my-paper.pdf --style "vintage travel poster" --quality low   # cheap draft
-python examples/paper_to_poster.py papers/my-paper.pdf --mode layout --style "clean Swiss design"
+python examples/paper_to_poster.py papers/my-paper.pdf --orientation landscape
+python examples/paper_to_poster.py papers/my-paper.pdf --quality low                 # cheap draft
+python examples/paper_to_poster.py papers/my-paper.pdf --mode image --quality low    # whole poster as one image
 ```
 
 | Option | Meaning |
 |---|---|
-| `--mode image` (default) | The image model draws the **whole poster, text included**. Most striking; keep text short, as small text can occasionally come out misspelled. |
-| `--mode layout` | The image model draws only the illustration; the text is laid out in `poster.html` with exact typography. Open it in a browser → *Print → Save as PDF* for an A3 print. |
-| `--style "..."` | Any poster style: movie poster, propaganda poster, Bauhaus, conference poster, concert flyer… |
-| `--audience "..."` | Who it's for (default: curious non-experts walking past) |
+| `--mode layout` (default) | The image model draws only the overview figure; all text is laid out in `poster.html` with exact typography. Open it in a browser → *Print → Save as PDF* (A0, no margins) to print. |
+| `--mode image` | The image model draws the **whole poster, text included**. Fast preview, but scientific posters are text-heavy and small text can come out misspelled. |
+| `--orientation portrait\|landscape` | A0 portrait (3 columns, default) or landscape (4 columns) |
+| `--style "..."` | Visual style (default: clean academic poster, navy and orange accents) |
+| `--audience "..."` | Who it's for (default: researchers at a poster session, same broad field) |
 | `--quality low\|medium\|high` | Image quality (default `high`); use `low` while iterating |
 
-**Output:** `poster.png` (image mode) or `poster.html` + `illustration.png` (layout mode), plus `poster.json` (the content) and `image_prompt.txt` (the exact prompt sent, great for tweaking by hand).
+**Output:** `poster.html` + `figure.png` (layout mode) or `poster.png` + `image_prompt.txt` (image mode), plus `poster.json` (the content).
 
-**APIs used:** Responses API (PDF in → `Poster` schema out) · Images API (`gpt-image-2`, 1024×1536 portrait)
+**APIs used:** Responses API (PDF in → `Poster` schema out) · Images API (`gpt-image-2`)
 
 **Hack it:** a poster series (one per section of the paper), a "wanted" poster for the paper's main bug, a movie poster with the authors' methods as the cast.
 
