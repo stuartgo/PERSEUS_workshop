@@ -101,20 +101,6 @@ Once you have both versions, look at what the LLM actually produced and discuss:
 
 ---
 
-## Organisers
-
-**Before the workshop**
-
-1. Create a dedicated Project in the [OpenAI platform](https://platform.openai.com/) and a project API key to hand out.
-2. Set a budget limit on the project. Video is the most expensive, then images; text and speech are cheap.
-3. Do a dry run with the same key. Image and video models may need organisation verification.
-4. With many people on one key, Sora is the likeliest rate-limit bottleneck; encourage `--mode slides`.
-5. Put a few short papers (≤ 20 pages) in `papers/`.
-
-**Key handling:** `.env` is git-ignored. Tell everyone not to commit or share the key, and **revoke it after the workshop**.
-
----
-
 ## Troubleshooting
 
 | Problem | Fix |
