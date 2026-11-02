@@ -196,3 +196,33 @@ def ffmpeg(*args: str) -> None:
                             capture_output=True, text=True)
     if result.returncode != 0:
         raise RuntimeError(f"ffmpeg failed:\n{result.stderr}")
+
+
+def find_chrome() -> Optional[str]:
+    """Path to a Chrome / Chromium / Edge binary, or None."""
+    for name in ("google-chrome", "chromium", "chromium-browser", "chrome", "microsoft-edge"):
+        if path := shutil.which(name):
+            return path
+    for path in ("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                 "/Applications/Chromium.app/Contents/MacOS/Chromium",
+                 "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"):
+        if os.path.exists(path):
+            return path
+    return None
+
+
+def html_to_pdf(html_path: str | Path, pdf_path: str | Path) -> Optional[Path]:
+    """Print an HTML file to PDF with headless Chrome, honouring its @page size.
+    Returns the PDF path, or None (with a hint) if Chrome is not installed or fails."""
+    chrome = find_chrome()
+    if not chrome:
+        print("   (No Chrome/Chromium found, so no PDF. Open the HTML and Print -> Save as PDF instead.)")
+        return None
+    html_path, pdf_path = Path(html_path).resolve(), Path(pdf_path).resolve()
+    result = subprocess.run([chrome, "--headless", "--disable-gpu", "--no-pdf-header-footer",
+                             f"--print-to-pdf={pdf_path}", html_path.as_uri()],
+                            capture_output=True, text=True)
+    if result.returncode != 0 or not pdf_path.exists():
+        print(f"   (PDF export failed: {result.stderr.strip()[-300:]})")
+        return None
+    return pdf_path

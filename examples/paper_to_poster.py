@@ -8,7 +8,7 @@ Example 1 — PDF -> scientific (conference) poster.
 Two modes:
   layout  (default)  The image model only draws the overview figure; the text (title, authors,
                      Introduction / Methods / Results / Conclusions / References) is laid out
-                     in an HTML page with exact text. Print to PDF at A0 from your browser.
+                     in an HTML page with exact text. Also exported to poster.pdf (A0) via headless Chrome.
   image              The image model draws the WHOLE poster, text included. Quick to preview,
                      but a scientific poster has a lot of text and small text can come out wrong.
 
@@ -26,7 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # so `import pa
 
 from pydantic import BaseModel, Field
 
-from paperkit import ask_pdf, generate_image, output_dir
+from paperkit import ask_pdf, generate_image, html_to_pdf, output_dir
 
 
 class KeyNumber(BaseModel):
@@ -198,7 +198,8 @@ def main() -> None:
                        out / "figure.png", size="1536x1024", quality=args.quality)
         result = out / "poster.html"
         result.write_text(render_html(poster, args.style, args.orientation), encoding="utf-8")
-        print("   Tip: open it in a browser and Print -> Save as PDF (paper size A0, no margins) to print.")
+        if html_to_pdf(result, out / "poster.pdf"):
+            print("   Also saved poster.pdf (A0, ready to print).")
 
     print(f"\n✅ Done: {result}\n")
     print(poster.model_dump_json(indent=2))
