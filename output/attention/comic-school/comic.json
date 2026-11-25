@@ -1,0 +1,213 @@
+{
+  "title": "The Message You Missed",
+  "tagline": "A football chat helps explain a new way to translate.",
+  "key_message": "Letting pieces of a sentence connect directly helped computers learn translation faster.",
+  "takeaway": "Computers can learn translation faster when sentence pieces connect directly, like messages in a group chat.",
+  "paper_citation": "Vaswani et al. (2017). Attention Is All You Need.",
+  "cast": [
+    {
+      "name": "Sam",
+      "role": "Football fan with an unread team chat",
+      "look": "A 15-year-old boy with a lanky build, medium-brown skin, and short black curls. He wears a mustard-yellow hoodie, navy shorts, white socks, and muddy red football boots. His distinctive accessory is a black wristband with a small silver football charm."
+    },
+    {
+      "name": "Lea",
+      "role": "Curious friend who spots the useful connection",
+      "look": "A 15-year-old girl with a stocky build, light olive skin, and a straight dark-brown bob. She wears a teal overshirt, plain white T-shirt, purple trousers, and white trainers. Her distinctive accessory is a bright orange, crescent-shaped hair clip."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Somewhere Above the Biscuit Debate",
+      "panels": [
+        {
+          "narration": "",
+          "dialogue": [
+            {
+              "speaker": "Sam",
+              "text": "Where’s the match? Our team chat is enormous."
+            },
+            {
+              "speaker": "Lea",
+              "text": "The pitch update is above the biscuit argument."
+            }
+          ],
+          "characters": [
+            "Sam",
+            "Lea"
+          ],
+          "scene": "At a university science fair, Sam and Lea stand centrally beside a plain demonstration table. Sam frowns at his phone, whose screen contains a tall stack of blank chat bubbles. Lea points toward an earlier bubble. A football rests between Sam’s muddy boots. Use a medium, eye-level view with uncluttered upper-left space.",
+          "wide": false
+        },
+        {
+          "narration": "Older translation models often worked like a message passed down a line.",
+          "dialogue": [
+            {
+              "speaker": "Sam",
+              "text": "Each step waits for the one before?"
+            },
+            {
+              "speaker": "Lea",
+              "text": "Right. That makes learning harder to speed up."
+            }
+          ],
+          "characters": [
+            "Sam",
+            "Lea"
+          ],
+          "scene": "The table projects a central row of blank chat-bubble tiles, linked end to end. A single amber glow travels through one link while the remaining tiles stay dim. Sam leans close, impatiently tapping his wristband. Lea follows the chain with one finger. Keep the projection entirely free of symbols or writing.",
+          "wide": false
+        },
+        {
+          "narration": "The paper’s big idea: let sentence pieces link up directly.",
+          "dialogue": [
+            {
+              "speaker": "Lea",
+              "text": "Like finding the pitch update without passing through every argument."
+            }
+          ],
+          "characters": [
+            "Sam",
+            "Lea"
+          ],
+          "scene": "In a closer view, the projected blank tiles form a shallow arc at the centre. Glowing threads directly connect distant tiles, bypassing the intervening ones. Sam raises his eyebrows as Lea gestures across the arc. His phone sits beneath the projection, visually echoing its blank chat-bubble shapes. Leave the upper-left background clear.",
+          "wide": false
+        },
+        {
+          "narration": "Several sets of links can pick up different clues.",
+          "dialogue": [
+            {
+              "speaker": "Sam",
+              "text": "Pitch update. Kit update. Biscuit update."
+            },
+            {
+              "speaker": "Lea",
+              "text": "You’ve found your priorities."
+            }
+          ],
+          "characters": [
+            "Sam",
+            "Lea"
+          ],
+          "scene": "The central projection now has three differently coloured sets of threads connecting different blank tiles. Lea watches with an amused smile. Sam studies it seriously while retrieving a slightly crushed biscuit from his hoodie pocket. His football remains by his boots. Frame both teenagers from the waist up, with the biscuit clearly visible.",
+          "wide": false
+        }
+      ]
+    },
+    {
+      "heading": "Faster Learning, Same Team Chat",
+      "panels": [
+        {
+          "narration": "This translation design links sentence pieces like messages in a group chat.",
+          "dialogue": [
+            {
+              "speaker": "Sam",
+              "text": "Okay. What does connecting the pieces change?"
+            }
+          ],
+          "characters": [
+            "Sam",
+            "Lea"
+          ],
+          "scene": "Sam and Lea stand at the plain science-fair table in a fresh, self-contained establishing view. Between them floats an arc of blank chat-bubble tiles joined by glowing threads. Sam holds his phone beside the projection, comparing their shapes. Lea rests one hand on the table. All surrounding stands are indistinct and unmarked.",
+          "wide": false
+        },
+        {
+          "narration": "During training, many sentence pieces can be worked on together.",
+          "dialogue": [
+            {
+              "speaker": "Lea",
+              "text": "It learned faster than earlier translation designs in the paper."
+            },
+            {
+              "speaker": "Sam",
+              "text": "Less waiting around. I approve."
+            }
+          ],
+          "characters": [
+            "Sam",
+            "Lea"
+          ],
+          "scene": "A close view centres on the projected tiles, with many glowing simultaneously and threads stretching between them. Lea opens both hands toward the whole arrangement. Sam has pulled up a stool but stops halfway through sitting, looking pleasantly surprised. The tabletop holds only the phone and a football-shaped key dish, without markings.",
+          "wide": false
+        },
+        {
+          "narration": "Its best English-to-German result beat every earlier result they compared.",
+          "dialogue": [
+            {
+              "speaker": "Sam",
+              "text": "Does it write the whole translation at once?"
+            },
+            {
+              "speaker": "Lea",
+              "text": "No. It still writes one piece at a time."
+            }
+          ],
+          "characters": [
+            "Sam",
+            "Lea"
+          ],
+          "scene": "The projection shows connected blank tiles above a separate, emerging row below. Only the next tile in the lower row is materialising; empty space follows it. Lea points to that single new tile while Sam watches attentively. Keep the action central and the visual distinction between the connected input and growing output simple.",
+          "wide": false
+        },
+        {
+          "narration": "",
+          "dialogue": [
+            {
+              "speaker": "Sam",
+              "text": "Can it fix our team chat?"
+            },
+            {
+              "speaker": "Lea",
+              "text": "Try reading the message first."
+            }
+          ],
+          "characters": [
+            "Sam",
+            "Lea"
+          ],
+          "scene": "Sam stands centrally, offering his phone toward the impressive projection with exaggerated hope. Lea gently turns the phone back toward him, wearing a warm, deadpan expression. His muddy boots and football are visible below the table. A tiny biscuit crumb clings to his hoodie. Use a slightly wider view for the final reaction.",
+          "wide": false
+        }
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "claim": "Earlier recurrent translation models computed states sequentially, with each position depending on the previous state.",
+      "source": "Section 1, Introduction."
+    },
+    {
+      "claim": "This sequential structure limited parallel computation within training examples.",
+      "source": "Section 1, Introduction."
+    },
+    {
+      "claim": "The Transformer uses attention rather than recurrence or convolution to relate sequence positions.",
+      "source": "Sections 2 and 3; Section 7, Conclusion."
+    },
+    {
+      "claim": "Encoder self-attention allows each position to attend directly to all positions in the preceding encoder layer, including distant positions.",
+      "source": "Section 3.2.3, Applications of Attention; Section 4 and Table 1."
+    },
+    {
+      "claim": "Multiple attention heads allow different sets of relationships to be considered in parallel.",
+      "source": "Section 3.2.2, Multi-Head Attention."
+    },
+    {
+      "claim": "Different attention heads can exhibit different patterns related to sentence structure.",
+      "source": "Section 4; appendix Figures 3–5."
+    },
+    {
+      "claim": "The Transformer permits more parallel processing during training and was trained faster than the earlier recurrent or convolutional translation architectures discussed.",
+      "source": "Section 1; Section 5.2; Section 7, Conclusion."
+    },
+    {
+      "claim": "The big Transformer’s English-to-German translation result exceeded the previously reported results compared in the paper, including ensembles.",
+      "source": "Section 6.1, Machine Translation; Table 2."
+    },
+    {
+      "claim": "The decoder generates its output one element at a time, using previously generated elements.",
+      "source": "Section 3, Model Architecture; Section 3.1, Decoder."
+    }
+  ]
+}

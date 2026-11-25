@@ -40,7 +40,7 @@ Iterate: read the output, say specifically what is wrong ("too childish", "the s
 
 ## Examples
 
-The scripts in `examples/` are **starting points, not solutions**. They are written for a generic audience. Read them, copy one, and change it so it makes something for *your* audience. The prompt at the top of each script is the part to rewrite first. [`paperkit.py`](paperkit.py) has the shared building blocks (read a PDF, generate images, speech and video); [`examples/starter.py`](examples/starter.py) is a minimal template.
+The scripts in `examples/` are **starting points, not solutions**. The poster, podcast and video examples are written for a generic audience; the comic example shows the full task, with one version for each of two specific audiences. Read them, copy one, and change it so it makes something for *your* audience. The prompt at the top of each script is the part to rewrite first. [`paperkit.py`](paperkit.py) has the shared building blocks (read a PDF, generate images, speech and video); [`examples/starter.py`](examples/starter.py) is a minimal template.
 
 ### 🖼️ Poster: `examples/paper_to_poster.py`
 
@@ -72,11 +72,53 @@ python examples/paper_to_video.py papers/my-paper.pdf --mode slides --shots 4 --
 
 `--mode slides` (still images, fast and cheap) is best for iterating. Sora clips take 5–10 minutes.
 
+### 🦸 Comic for two audiences: `examples/paper_to_comic.py`
+
+This example turns the Transformer paper ([`papers/attention.pdf`](papers/attention.pdf), *Attention Is All You Need*) into a cartoon comic for two very different audiences, which is exactly the task above:
+
+| | 💼 `business` | 🧪 `school` |
+|---|---|---|
+| **Who** | Business people at a conference on applying AI in business | 15-year-olds visiting a university science fair |
+| **What they know** | Extensive industry knowledge, minimal technical experience | Nothing about AI |
+| **Format** | Two A4 pages, 5–6 panels each | Two simple comic strips of 3–4 panels |
+| **Tone** | Dry, witty business-magazine cartoon; business analogies | Bright, funny, very short sentences; everyday analogies |
+
+#### Run it
+
+```bash
+pip install -r requirements.txt
+cp .env.example .env          # then paste your API key into .env
+
+python examples/paper_to_comic.py papers/attention.pdf                      # both audiences
+python examples/paper_to_comic.py papers/attention.pdf --audience school    # just one
+```
+
+Useful options:
+
+- `--text-only` writes the script and a layout with grey placeholders but draws no images. Use it to iterate on the prompt cheaply.
+- `--reuse-script` keeps the existing `comic.json` and only redraws the pictures.
+- `--quality low` gives cheap image drafts. The default is `medium`.
+
+Each audience gets its own folder, `output/attention/comic-business/` and `output/attention/comic-school/`, containing:
+
+- `comic.pdf` / `comic.html`: the finished comic
+- `script.md`: the text version, with a list of **facts used and where they come from in the paper**, handy for the accuracy discussion
+- `characters.png` and `panel_*.png`: the pictures
+
+#### How it works
+
+1. **Script:** the paper and an audience brief go to the text model, which returns a structured comic: cast, panels, captions, dialogue, a scene description per panel, and the facts it relied on.
+2. **Characters:** the image model draws a character sheet, then every panel is drawn *from that sheet* so the characters look the same throughout.
+3. **Layout:** the words are added in HTML, not drawn by the image model, so they are spelled exactly right. The page is then printed to PDF with headless Chrome. Without Chrome, open `comic.html` and use Print → Save as PDF.
+
+#### Make it your own
+
+The `AUDIENCES` dict at the top of the script is the part to rewrite first. Each audience has a `persona`, a `format`, `writing` rules, a `cast` and an image `style`. Change those for your own paper and audiences, or add a third audience.
+
 ### Other formats
 
 Anything you can ask an LLM to write, you can build on. Some ideas:
 
-- 🦸 **Comic strip** with consistent characters
 - 🌙 **Bedtime story** or picture book
 - 🎞️ **Movie trailer** or 📺 **news broadcast**
 - 🧠 **Quiz** or flashcards
