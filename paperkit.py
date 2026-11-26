@@ -168,7 +168,11 @@ def wait_for_video(video_id: str, out_path: str | Path, label: str = "") -> Path
         print(f"  {label or video_id}: {job.status} {getattr(job, 'progress', 0) or 0}%", flush=True)
         time.sleep(10)
     out_path = Path(out_path)
-    client().videos.download_content(video_id, variant="video").write_to_file(out_path)
+    # Ask for the raw bytes: MP4 is already compressed, and httpx's brotli/zstd
+    # decoders can fail on large bodies ("output buffer limit"), e.g. on Windows/conda.
+    client().videos.download_content(
+        video_id, variant="video", extra_headers={"Accept-Encoding": "identity"}
+    ).write_to_file(out_path)
     return out_path
 
 
